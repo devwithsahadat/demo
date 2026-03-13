@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white flex items-center justify-center min-h-screen">
+  <div class="bg-slate-900 p-6 rounded-xl w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4">Admin Login</h1>
+    <input id="email" class="w-full p-2 mb-2 bg-slate-800 rounded" placeholder="Email" />
+    <input id="password" type="password" class="w-full p-2 mb-3 bg-slate-800 rounded" placeholder="Password" />
+    <button id="login" class="w-full bg-cyan-400 text-slate-900 p-2 rounded">Login</button>
+  </div>
+  <script>
+    document.getElementById('login').addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const res = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        location.href = 'admin-dashboard.html';
+      } else alert(data.message);
+    });
+  </script>
+</body>
+</html>

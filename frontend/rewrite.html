@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rewrite Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-slate-950 text-white">
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold mb-6">Rewrite Studio</h1>
+    <div class="grid md:grid-cols-2 gap-6">
+      <section class="card">
+        <textarea id="inputText" class="w-full h-56 p-3 rounded-lg bg-slate-900" placeholder="Paste text you own or are licensed to use..."></textarea>
+        <div class="grid grid-cols-2 gap-2 mt-3">
+          <select id="mode" class="field"><option value="standard">Standard</option><option value="creative">Creative</option><option value="seo">SEO</option><option value="summary">Summary</option><option value="expand">Expand</option></select>
+          <select id="language" class="field"><option value="en">English</option><option value="bn">Bangla</option><option value="hi">Hindi</option></select>
+        </div>
+        <input id="keywords" class="field mt-2" placeholder="Keywords to preserve (comma separated)" />
+        <button id="rewriteBtn" class="btn mt-4 w-full">Rewrite</button>
+        <p class="text-xs text-slate-400 mt-2">Legal note: only transform content you have rights to use.</p>
+      </section>
+      <section class="card">
+        <div id="loading" class="hidden">⏳ Rewriting with AI...</div>
+        <h2 class="font-semibold">Output</h2>
+        <textarea id="outputText" class="w-full h-56 p-3 rounded-lg bg-slate-900 mt-2"></textarea>
+        <p id="meta" class="text-sm text-slate-300 mt-2"></p>
+        <div class="mt-3 flex gap-2">
+          <button id="copyBtn" class="btn">Copy</button>
+          <button id="downloadBtn" class="btn">Download TXT</button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

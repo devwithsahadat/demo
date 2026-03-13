@@ -1,0 +1,37 @@
+CREATE DATABASE IF NOT EXISTS ai_rewriter CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ai_rewriter;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role ENUM('user','admin') DEFAULT 'user',
+  is_banned TINYINT(1) DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS rewrites (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  source_text MEDIUMTEXT NOT NULL,
+  rewritten_text MEDIUMTEXT NOT NULL,
+  mode VARCHAR(50) NOT NULL,
+  language VARCHAR(10) DEFAULT 'en',
+  similarity_score INT DEFAULT 0,
+  plagiarism_safe_score INT DEFAULT 0,
+  generated_title VARCHAR(255),
+  hashtags VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS downloads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  rewrite_id INT NOT NULL,
+  format ENUM('txt','docx') NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (rewrite_id) REFERENCES rewrites(id) ON DELETE CASCADE
+);

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-slate-950 text-white">
+  <main class="max-w-6xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold">Dashboard</h1>
+    <p class="text-slate-300 mb-6">Rewrite history, saved content, and download activity.</p>
+    <div class="card">
+      <h2 class="text-xl font-semibold mb-3">Recent rewrites</h2>
+      <table class="w-full text-sm" id="historyTable">
+        <thead><tr><th class="text-left">Title</th><th class="text-left">Mode</th><th class="text-left">Language</th><th class="text-left">Date</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
