@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white">
+  <main class="max-w-5xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-5">Admin Dashboard</h1>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-slate-800 p-4 rounded">Total Users: <span id="users">-</span></div>
+      <div class="bg-slate-800 p-4 rounded">Total Rewrites: <span id="rewrites">-</span></div>
+      <div class="bg-slate-800 p-4 rounded">Banned Users: <span id="banned">-</span></div>
+    </div>
+  </main>
+  <script>
+    (async () => {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:5000/api/admin/stats', { headers: { Authorization: `Bearer ${token}` } });
+      const data = await res.json();
+      if (!res.ok) return alert(data.message || 'Unauthorized');
+      document.getElementById('users').textContent = data.totalUsers;
+      document.getElementById('rewrites').textContent = data.totalRewrites;
+      document.getElementById('banned').textContent = data.bannedUsers;
+    })();
+  </script>
+</body>
+</html>
